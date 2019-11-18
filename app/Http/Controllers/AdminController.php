@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Contracts\Encryption\DecryptException;
 use \Crypt;
 
-use App\Product;
-use App\sub_sub_product;
-use App\sub_product;
+use App\Models\Product;
+use App\Models\sub_sub_product;
+use App\Models\sub_product;
+use App\Models\product_description;
 use View;
 use DB;
 class AdminController extends Controller
@@ -27,7 +28,8 @@ class AdminController extends Controller
 
     public function showProduct()
     {
-        $product = Product::all();
+        $product['allproduct'] = Product::all();
+        $product['sub_product'] = sub_product::all();
         // echo"<pre>";print_r($product); echo"</pre>";exit();
         return View::make('admin.product', array('product' => $product));
         // return view('admin.product',$product);
@@ -89,8 +91,9 @@ class AdminController extends Controller
        // echo"<pre>";print_r($_POST); echo"</pre>";
        // echo  $request->all()['productname'];exit();
        $product= new sub_product;
-       $sproduct->p_id = $request->all()['productname'];
+       $product->product_id = $request->all()['productname'];
        $product->name = $request->all()['name'];
+       $product->url = $request->all()['url'];
        $product->save();
 
        return redirect()->back()->withSuccess('Insert successfully !');
@@ -99,6 +102,7 @@ class AdminController extends Controller
 
     public function addsubtosubproduct(Request $request)
     {
+       // echo"<pre>";print_r($request->all()); echo"</pre>";exit();
         $sub_products=array();
         foreach ($request->all() as $key => $value ) {
              $search = 'sname';
@@ -109,16 +113,68 @@ class AdminController extends Controller
 
         foreach ($sub_products as $key => $$value) {
             if (!empty($sub_products)) {
-                $sproduct = new sub_product;
-                $sproduct->p_id = $request->all()['productname'];
-                $sproduct->name = $request->all()['name'];
+                $sproduct = new sub_sub_product;
+                $sproduct->product_id = $request->all()['productname'];
+                $sproduct->sub_product_id = $request->all()['subproductname'];
                 $sproduct->sub_name = $value;
+                $sproduct->url = $request->all()['url'];
                 $sproduct->save();
             }
         }
 
         $product = Product::all();
-        return View::make('admin.subProduct', array('product' => $product));
+        return redirect()->back()->withSuccess('Insert successfully !');
 
+    }
+
+    public function showsubtosubpage($id,$name){
+        // echo $name . "<br>";exit();
+        $data['productdata'] = DB::table('product_description')
+            ->join('product', 'product_description.product_id', '=', 'product.id')
+            ->join('sub_product', 'sub_product.id', '=', 'product_description.sub_product_id')
+            ->join('sub_sub_product', 'sub_sub_product.id', '=', 'product_description.sub_sub_product')
+            ->where('product_description.sub_sub_product', $id)
+            ->select('product_description.*', 'product.name as pname', 'sub_product.name as sub_product_name')
+            ->get();
+        $data['pagename']=$name;
+        // echo "<pre>";print_r($data);exit();
+        return View::make('productDescription', array('data' => $data));
+    }
+
+    public function showProductDescription(){
+        $product['allproduct'] = Product::all();
+        $product['sub_product'] = sub_product::all();
+        $product['sub_to_subproduct'] = sub_sub_product::all();
+        return View::make('admin.productdescription', array('product' => $product));
+        // return view('admin.product',$product);
+    }
+
+    public function productdefination(Request $request){
+      $file = $request->file('uploadfile');
+   
+      $destinationPath = 'uploads/ProductImage';
+      $filname =  $file->move($destinationPath,$file->getClientOriginalName());
+      $item = new product_description;
+      $item->product_id = $request->all()['productname'];
+      $item->sub_product_id = $request->all()['subproductname'];
+      $item->sub_sub_product = $request->all()['sub_to_subproductname'];
+      $item->itemname = $request->all()['itemname'];
+      $item->description = $request->all()['description'];      
+      $item->image   = $filname;
+      $item->size = $request->all()['size'];
+      $item->temperature = $request->all()['temperature'];
+      $item->speed = $request->all()['speed'];
+      $item->pressure = $request->all()['pressure'];
+      $item->material = $request->all()['material'];
+      $item->type =$request->all()['type'];
+      $item->floatdia = $request->all()['floatdia'];
+      $item->floatweight = $request->all()['floatweight'];
+      $item->threadtype = $request->all()['threadtype'];
+      $item->threadsize = $request->all()['threadsize'];
+      $item->end = $request->all()['end'];
+      $item->save();
+      return redirect()->back()->withSuccess('Insert successfully !');
+        // echo "<pre>";print_r( $request->all());exit();
+        // return view('admin.product',$product);
     }
 }

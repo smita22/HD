@@ -11,7 +11,7 @@ p {margin: 0;}
 
 html, body{
 	font-family: 'PT Sans', sans-serif;
-    font-size: 100%;
+    /*font-size: 100%;*/
   	overflow-x: hidden;
 	background: #fff;
 }

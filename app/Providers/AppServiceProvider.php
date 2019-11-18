@@ -3,9 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Product;
-use App\sub_sub_product;
-
+use App\Models\Product;
+use App\Models\sub_sub_product;
+use App\Models\sub_product;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,9 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('layouts.app', function($view)
         {
-            $product = sub_product::all();
-           
-            $view->with('product',  $product);
+            $data['prd'] =  Product::with('subproducts','subtosubproducts')->get()->toArray(); 
+            $view->with('prd',  $data);            
         });
     }
 }

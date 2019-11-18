@@ -1,13 +1,177 @@
-/*
-  Theme Name: Reveal
-  Theme URL: https://bootstrapmade.com/reveal-bootstrap-corporate-template/
-  Author: BootstrapMade.com
-  License: https://bootstrapmade.com/license/
-*/
 
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
+
+.menu-large {
+  position: static !important;
+}
+
+.menu-large .megamenu {
+  padding: 20px;
+  width: 100%;
+  max-width: 1140px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  margin-top: -1px;
+}
+
+.menu-large a.nav-link {
+  padding: 7px !important;
+  padding-left: 0 !important;
+}
+.navbar {
+    padding: 0;
+}
+div#logo {
+    padding-right: 450px;
+    padding-bottom: 20px;
+}
+/*
+*
+* ======================================================================
+* NAVBAR
+* ======================================================================
+*
+*/
+.navbar {
+  border-bottom: 1px solid #e6e6e6;
+  background-color: #fff;
+}
+
+.navbar .navbar-nav > .nav-item > .nav-link {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  padding: 14px 15px !important;
+  color: #555;
+}
+
+@media (max-width: 991.98px) {
+  .navbar .navbar-nav > .nav-item > .nav-link {
+    padding: 10px 15px !important;
+  }
+}
+
+.navbar .navbar-nav > .nav-item > .nav-link.active, .navbar .navbar-nav > .nav-item > .nav-link:hover, .navbar .navbar-nav > .nav-item > .nav-link:focus {
+  background: #50d8af;
+}
+
+@media (max-width: 991.98px) {
+  .navbar .dropdown-menu {
+    position: relative !important;
+    border: none;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+.navbar .megamenu {
+  padding: 30px !important;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+@media (max-width: 991.98px) {
+  .navbar .megamenu {
+    padding: 15px !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+.navbar .menu-large h5 {
+  font-size: 1.125rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-bottom: 10px;
+  border-bottom: dotted 1px #555;
+}
+
+@media (max-width: 767.98px) {
+  .navbar .menu-large h5 {
+    font-size: 0.9rem;
+  }
+}
+
+.navbar .menu-large ul {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .menu-large ul .nav-item {
+  list-style-type: none;
+  border-bottom: solid 1px #eee;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 0;
+}
+
+.navbar .menu-large ul .nav-item a {
+  color: #999;
+  font-size: 0.738rem;
+  display: block;
+  padding: 0 !important;
+}
+
+.navbar .menu-large ul .nav-item a:hover {
+  color: #429244 !important;
+  text-decoration: none;
+}
+
+.navbar .menu-large .banner {
+  margin-bottom: 10px;
+}
+
+.navbar #basket-overview {
+  padding: 0;
+}
+
+.navbar .navbar-btn {
+  color: #fff;
+  margin-right: 10px;
+}
+
+
+
+
+
+/*
+* 10. DROPDOWNS
+*/
+.dropdown-menu {
+  min-width: 10rem;
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  font-size: 0.9rem;
+  color: #212529;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+
+.dropdown-item {
+  padding: 0.25rem 1.5rem;
+  font-weight: 400;
+  color: #212529;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  color: #16181b;
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff;
+  background-color: #429244;
+}
+
+.dropdown-item.disabled, .dropdown-item:disabled {
+  color: #6c757d;
+}
 
 body {
   background: #fff;
@@ -118,12 +282,14 @@ h6 {
   border-left: 0;
 }
 
+
+
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
 
 #header {
-  padding: 20px 0;
+  /*padding: 20px 0;*/
   height: 84px;
   transition: all 0.5s;
   z-index: 997;
@@ -331,6 +497,10 @@ h6 {
 
 /* Nav Meu Container */
 
+nav .container {
+    height: 55px;
+}
+
 #nav-menu-container {
   float: right;
   margin: 0;
@@ -528,6 +698,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 .section-header p {
   padding: 0;
   margin: 0;
+}
+.collapse{
+  display: block;
 }
 
 /* About Section

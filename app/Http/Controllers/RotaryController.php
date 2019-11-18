@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\product_description;
+use View;
 class RotaryController extends Controller
 {
     /**
@@ -22,9 +23,13 @@ class RotaryController extends Controller
         return view('rotry.allrotry');
     }
 
-    public function showrotary_readmorePage()
+    public function showrotary_readmorePage($id)
     {
-        return view('rotry.rotary_readmore');
+        // print_r($id);exit();
+        $data = product_description::find($id);
+        // echo "<pre>";print_r($data);exit();
+        return View::make('rotry.rotary_readmore', array('data' => $data));
+        // return view('rotry.rotary_readmore');
     }
 
     public function showrotary_pressure_joints()
